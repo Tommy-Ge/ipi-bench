@@ -1,0 +1,29 @@
+{
+  "threshold": 0.9189594629617109,
+  "line_precision": 0.9864559819413092,
+  "line_recall": 0.833969465648855,
+  "line_f1": 0.9038262668045501,
+  "line_auc": 0.9867610330401775,
+  "doc_detect_rate": 0.9458333333333333,
+  "doc_full_removal_rate": 0.8111111111111111,
+  "clean_doc_false_positive_rate": 0.0,
+  "full_removal_by_technique": {
+    "authority": 0.9555555555555556,
+    "combined": 0.4,
+    "fake_completion": 0.7888888888888889,
+    "fake_system": 0.6333333333333333,
+    "ignore_previous": 0.9333333333333333,
+    "multilingual": 0.8333333333333334,
+    "naive": 1.0,
+    "urgency": 0.9444444444444444
+  },
+  "n_injected_docs": 720,
+  "n_clean_docs": 90,
+  "train_info": {
+    "train_lines": 15120,
+    "train_pos": 1316,
+    "oof_auc": 1.0,
+    "oof_f1": 1.0,
+    "threshold": 0.9189594629617109
+  }
+}

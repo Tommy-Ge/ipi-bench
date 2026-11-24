@@ -1,0 +1,55 @@
+# Model registry. Keys are the names used on the command line (`ipibench run --models ...`).
+# provider: openai = any OpenAI-compatible Chat Completions API; ollama = local Ollama; mock = offline fake.
+# API keys are read from the environment variable named in api_key_env.
+
+models:
+  gpt-4o:
+    provider: openai
+    model: gpt-4o-2024-08-06
+    api_key_env: OPENAI_API_KEY
+    concurrency: 8
+
+  gpt-4o-mini:
+    provider: openai
+    model: gpt-4o-mini-2024-07-18
+    api_key_env: OPENAI_API_KEY
+    concurrency: 16
+
+  # ---- Llama 3 -------------------------------------------------------------
+  llama-3.1-8b:                      # local: `ollama pull llama3.1:8b`
+    provider: ollama
+    model: llama3.1:8b
+    concurrency: 2
+
+  llama-3.1-70b:                     # hosted (Together AI)
+    provider: openai
+    model: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
+    base_url: https://api.together.xyz/v1
+    api_key_env: TOGETHER_API_KEY
+
+  # ---- Qwen ----------------------------------------------------------------
+  qwen2.5-7b:                        # local: `ollama pull qwen2.5:7b`
+    provider: ollama
+    model: qwen2.5:7b
+    concurrency: 2
+
+  qwen2.5-72b:                       # hosted (Alibaba Cloud DashScope, OpenAI-compatible mode)
+    provider: openai
+    model: qwen2.5-72b-instruct
+    base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+    api_key_env: DASHSCOPE_API_KEY
+
+  # ---- vLLM / any self-hosted OpenAI-compatible server ------------------------
+  vllm-local:
+    provider: openai
+    model: Qwen/Qwen2.5-7B-Instruct
+    base_url: http://localhost:8000/v1
+    api_key: EMPTY
+
+  # ---- offline pipeline test (numbers are NOT results) -----------------------
+  mock-a:
+    provider: mock
+    concurrency: 64
+  mock-b:
+    provider: mock
+    concurrency: 64
