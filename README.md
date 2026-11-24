@@ -83,7 +83,7 @@ Agenda:
 ## 快速开始
 
 ```bash
-git clone https://github.com/<you>/ipi-bench && cd ipi-bench
+git clone https://github.com/Tommy-Ge/ipi-bench && cd ipi-bench
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 
