@@ -137,8 +137,12 @@ def train_tfidf(train_samples: list[dict], seed: int = 0) -> tuple[InjectionDete
         oof[va] = m.predict_proba([texts[i] for i in va])[:, 1]
     prec, rec, thr = precision_recall_curve(y, oof)
     f1 = 2 * prec * rec / np.clip(prec + rec, 1e-9, None)
-    best = int(np.argmax(f1[:-1]))
-    threshold = float(thr[best])
+    # When the train data separates (almost) perfectly, a wide range of thresholds ties for
+    # the best F1; take the middle of that plateau rather than its fragile lower edge.
+    f1 = f1[:-1]
+    plateau = thr[f1 >= f1.max() - 0.005]
+    threshold = float(np.clip(np.median(plateau), 0.5, 0.95))
+    best = int(np.argmax(f1))
     model = _make_pipeline().fit(texts, y)
     info = {"train_lines": len(texts), "train_pos": int(y.sum()), "oof_auc": float(roc_auc_score(y, oof)),
             "oof_f1": float(f1[best]), "threshold": threshold}
